@@ -26,8 +26,12 @@ interface Expected2 {
 
 
 // ============= Your Code Here =============
-type MyExclude<T, U> = T extends U ? never : T;
-type MyPick<T, K extends keyof T> = {
-  [P in K]: T[P]
+// type MyExclude<T, U> = T extends U ? never : T;
+// type MyPick<T, K extends keyof T> = {
+//   [P in K]: T[P]
+// }
+// type MyOmit<T, K> = MyPick<T, MyExclude<keyof T, K>>
+
+type MyOmit<T, K> = {
+  [P in keyof T as P extends K ? never : P]: T[P] 
 }
-type MyOmit<T, K> = MyPick<T, MyExclude<keyof T, K>>
